@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Исследователь - Игра с квадрокоптером</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="welcome-screen" class="screen">
+        <div class="screen-content">
+            <h1>Исследователь</h1>
+            <p>Управляйте квадрокоптером, избегайте стен и собирайте батарейки!</p>
+            <input type="text" id="player-name" placeholder="Введите ваше имя" maxlength="15">
+            <button id="start-btn" disabled>Начать игру</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <div class="game-info">
+            <div>Игрок: <span id="display-name"></span></div>
+            <div>Время: <span id="time">00:00</span></div>
+            <div>Заряд: <span id="power">50</span>%</div>
+        </div>
+        <div id="game-container">
+            <div id="background"></div>
+            <div id="player"></div>
+            <div id="game-elements"></div>
+        </div>
+    </div>
+
+    <div id="result-screen" class="screen hidden">
+        <div class="screen-content">
+            <h1>Результат</h1>
+            <p>Игрок: <span id="result-name"></span></p>
+            <p>Время полета: <span id="result-time"></span></p>
+            <button id="restart-btn">Играть снова</button>
+        </div>
+    </div>
+
+    <div id="gameover-screen" class="screen hidden">
+        <div class="screen-content">
+            <h1>Игра окончена!</h1>
+            <p id="gameover-message"></p>
+            <button id="gameover-restart-btn">Играть снова</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

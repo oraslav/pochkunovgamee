@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    overflow: hidden;
+    background-color: #222;
+    color: white;
+}
+
+.screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: opacity 0.5s;
+    z-index: 10;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.screen-content {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 90%;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.game-info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 5;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#background {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a1a 25%, #2a2a2a 25%, #2a2a2a 50%, #1a1a1a 50%, #1a1a1a 75%, #2a2a2a 75%);
+    background-size: 100px 100px;
+    animation: backgroundMove 20s linear infinite;
+}
+
+@keyframes backgroundMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Стили для квадрокоптера */
+#player {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    z-index: 2;
+    left: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#player::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50% 50% 0 0;
+    top: 5px;
+}
+
+#player::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 0 0 50% 50%;
+    bottom: 5px;
+}
+
+.drone-body {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    background-color: #4CAF50;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.propeller {
+    position: absolute;
+    width: 15px;
+    height: 5px;
+    background-color: #777;
+    border-radius: 5px;
+}
+
+.propeller.top-left {
+    top: 0;
+    left: 5px;
+}
+
+.propeller.top-right {
+    top: 0;
+    right: 5px;
+}
+
+.propeller.bottom-left {
+    bottom: 0;
+    left: 5px;
+}
+
+.propeller.bottom-right {
+    bottom: 0;
+    right: 5px;
+}
+
+.propeller::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: #777;
+    top: 1.5px;
+    left: 0;
+    transform: rotate(90deg);
+}
+
+.camera {
+    position: absolute;
+    width: 10px;
+    height: 8px;
+    background-color: #111;
+    border-radius: 3px;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+}
+
+.camera::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #00BFFF;
+    border-radius: 50%;
+    top: 2px;
+    left: 3px;
+}
+
+/* Стили для стен и батареек */
+.wall {
+    position: absolute;
+    width: 50px;
+    background: repeating-linear-gradient(
+        0deg,
+        #8B4513,
+        #8B4513 10px,
+        #A0522D 10px,
+        #A0522D 20px
+    );
+    z-index: 1;
+}
+
+.battery {
+    position: absolute;
+    width: 30px;
+    height: 50px;
+    background-color: #FFD700;
+    border: 3px solid #333;
+    border-radius: 5px;
+    z-index: 1;
+    animation: batteryFloat 2s infinite alternate;
+}
+
+.battery::before {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@keyframes batteryFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* Анимации */
+.crash-animation {
+    animation: crash 0.5s;
+}
+
+@keyframes crash {
+    0% { transform: translateY(-50%) rotate(0); }
+    20% { transform: translateY(-50%) rotate(-30deg); }
+    40% { transform: translateY(-50%) rotate(30deg); }
+    60% { transform: translateY(-50%) rotate(-45deg); }
+    80% { transform: translateY(-50%) rotate(45deg); }
+    100% { transform: translateY(-50%) rotate(0); }
+}
+
+.charge-animation {
+    animation: charge 0.5s;
+}
+
+@keyframes charge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
